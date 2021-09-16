@@ -19,6 +19,6 @@ public class Main {
 		thread1.join();
 		thread2.join();
 		thread3.join();
-		System.out.println(Shop.getCurrent());
+		Shop.printResult();
 	}
 }

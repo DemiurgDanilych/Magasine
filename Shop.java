@@ -1,8 +1,10 @@
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.LongAdder;
 
 public class Shop implements Runnable{
-	private static int OPERATION = 10;
-	static AtomicInteger result = new AtomicInteger();
+	
+	public static LongAdder revenueAllMagazine = new LongAdder();
+	public static int OPERATION = 10;
+	private LongAdder revenuesOneMagazine = new LongAdder();
 	
 	
 	@Override
@@ -11,13 +13,14 @@ public class Shop implements Runnable{
 	}
 	
 	private void fillAndAdd() {
-		for (int i = 0; i < OPERATION; i++){
-			result.incrementAndGet();
+		for (int i = 1; i < OPERATION; i++){
+			revenuesOneMagazine.add(i);
 		}
+		revenueAllMagazine.add(revenuesOneMagazine.sum());
 	}
 	
-	public static int getCurrent(){
-		return result.get();
+	public static void printResult(){
+		System.out.println("Выручка всех магазинов за день " + revenueAllMagazine.sum());
 	}
 	
 
